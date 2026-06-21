@@ -1,0 +1,31 @@
+# ================================================================
+# Dockerfile.bot - Galaxy Vast Telegram Bot
+# ================================================================
+FROM python:3.11-slim
+
+LABEL maintainer="Galaxy Vast Team"
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    PIP_NO_CACHE_DIR=1
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd -r galaxyvast && useradd -r -g galaxyvast galaxyvast
+
+WORKDIR /app
+
+COPY requirements.txt /app/requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+COPY backend/ /app/backend/
+
+RUN mkdir -p /app/logs && chown -R galaxyvast:galaxyvast /app
+
+USER galaxyvast
+
+CMD ["python", "-m", "backend.telegram.bot"]
