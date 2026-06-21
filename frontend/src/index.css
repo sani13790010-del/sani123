@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gv-bg-primary:    #070b12;
+  --gv-bg-secondary:  #0d1420;
+  --gv-bg-card:       #111827;
+  --gv-bg-card-hover: #161f2e;
+  --gv-border:        #1e2d40;
+  --gv-border-bright: #2a3f58;
+  --gv-accent:        #00d4ff;
+  --gv-accent-dim:    #0ea5e9;
+  --gv-gold:          #f59e0b;
+  --gv-green:         #10b981;
+  --gv-red:           #ef4444;
+  --gv-purple:        #8b5cf6;
+  --gv-text-primary:  #f0f6ff;
+  --gv-text-secondary:#94a3b8;
+  --gv-text-muted:    #475569;
+  --gv-font-fa:       'Vazirmatn', sans-serif;
+  --gv-font-mono:     'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { direction: rtl; }
+body {
+  font-family: var(--gv-font-fa);
+  background-color: var(--gv-bg-primary);
+  color: var(--gv-text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: var(--gv-bg-secondary); }
+::-webkit-scrollbar-thumb  { background: var(--gv-border-bright); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gv-accent-dim); }
+
+.font-mono { font-family: var(--gv-font-mono) !important; }
+.glow-accent { box-shadow: 0 0 20px rgba(0,212,255,0.15); }
+.glow-green  { box-shadow: 0 0 20px rgba(16,185,129,0.15); }
+.glow-red    { box-shadow: 0 0 20px rgba(239,68,68,0.15); }
+
+@keyframes borderGlow { 0%,100%{opacity:.5} 50%{opacity:1} }
+.border-animated { animation: borderGlow 3s ease-in-out infinite; }
+
+@keyframes pulse-dot { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:.7} }
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+@keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.fade-in-up { animation: fadeInUp 0.4s ease forwards; }
+
+.gv-card {
+  background: var(--gv-bg-card);
+  border: 1px solid var(--gv-border);
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gv-card:hover { border-color: var(--gv-border-bright); }
+
+.nav-item-active {
+  background: linear-gradient(90deg,rgba(0,212,255,0.12) 0%,transparent 100%);
+  border-right: 3px solid var(--gv-accent);
+  color: var(--gv-accent);
+}
+
+.badge-buy    { background:rgba(16,185,129,0.15);  color:#10b981; border:1px solid rgba(16,185,129,0.3); border-radius:9999px; padding:2px 8px; }
+.badge-sell   { background:rgba(239,68,68,0.15);   color:#ef4444; border:1px solid rgba(239,68,68,0.3);  border-radius:9999px; padding:2px 8px; }
+.badge-active { background:rgba(0,212,255,0.15);   color:#00d4ff; border:1px solid rgba(0,212,255,0.3);  border-radius:9999px; padding:2px 8px; }
+.badge-wait   { background:rgba(245,158,11,0.15);  color:#f59e0b; border:1px solid rgba(245,158,11,0.3); border-radius:9999px; padding:2px 8px; }
+
+.metric-value {
+  font-family: var(--gv-font-mono);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--gv-bg-card) !important;
+  border: 1px solid var(--gv-border) !important;
+  border-radius: 8px !important;
+  color: var(--gv-text-primary) !important;
+}
